@@ -1,35 +1,37 @@
 package dark;
 
-import java.util.logging.Handler;
-
-import javafx.application.Application;
-import javafx.event.*;
+import javafx.application.*;
+import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.stage.*;
 
 public class App extends Application
 {
-	Button butt;
-		public static void main (String[] args)
-		{launch (args);}
+	Stage window;
+	public static void main(String[] args)
+	{
+		launch(args);
+	}
 
-		@Override
-		public void start(Stage primaryStage) throws Exception
-		{
-				primaryStage.setTitle("Windoo");
+	@Override
+	public void start(Stage primaryStage) 
+	{
+		window = primaryStage;
+		window.setTitle("The window");
+		
+		Button button = new Button("Click me");
+		button.setOnAction(e -> {
+			Boolean result = confirmbox.confirm("Are you dumb?");
+			System.out.println(result);
+		});
 
-
-				Button butt = new Button("Click me");
-				butt.setOnAction(e -> System.out.println("Button clicked"));
-
-				StackPane layout = new StackPane();
-				layout.getChildren().add(butt);
-
-				Scene scene = new Scene(layout, 600, 600);
-				primaryStage.setScene(scene);
-				primaryStage.show();
-		}
-
+		VBox layout = new VBox();
+		layout.getChildren().add(button);
+		layout.setAlignment(Pos.CENTER);
+		Scene sc = new Scene(layout, 300, 300);
+		window.setScene(sc);
+		window.show();
+	}
 }
