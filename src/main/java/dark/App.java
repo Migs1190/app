@@ -22,9 +22,10 @@ public class App extends Application
 		window.setTitle("The window");
 		
 		Button button = new Button("Click me");
-		button.setOnAction(e -> {
-			Boolean result = confirmbox.confirm("Are you dumb?");
-			System.out.println(result);
+		button.setOnAction(e -> closing());
+		window.setOnCloseRequest(e -> {
+			e.consume();
+			closing();
 		});
 
 		VBox layout = new VBox();
@@ -33,5 +34,12 @@ public class App extends Application
 		Scene sc = new Scene(layout, 300, 300);
 		window.setScene(sc);
 		window.show();
+	}
+
+	private void closing()
+	{
+		Boolean answer = confirmbox.confirm("Are you sure you want to exit?");
+		if (answer)
+			window.close();
 	}
 }
