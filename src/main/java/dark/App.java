@@ -1,8 +1,7 @@
 package dark;
 
 import javafx.application.*;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -17,37 +16,37 @@ public class App extends Application
 	}
 
 	@Override
-	public void start(Stage primaryStage) 
+	public void start(Stage primaryStage)
 	{
 		window = primaryStage;
 		window.setTitle("The window");
 
+
 		GridPane grid = new GridPane();
+
 		grid.setPadding(new Insets(10, 10, 10, 10));
-		grid.setVgap(6);
-		grid.setHgap(9);
+		grid.setVgap(7);
+		grid.setHgap(10);
 
-		Label name = new Label("Username");
-		GridPane.setConstraints(name, 0, 0);
+		Label name = new Label("Name:");
+			GridPane.setConstraints(name, 0, 0);
+		TextField usr = new TextField();
+		usr.setPromptText("Username");
+			GridPane.setConstraints(usr, 1, 0);
 
-		TextField nameinput = new TextField();
-		nameinput.setPromptText("Username");
-		GridPane.setConstraints(nameinput, 1, 0);
-
-
-		Label pass = new Label("Password");
-		GridPane.setConstraints(pass, 0, 1);
-
-		TextField passinput = new TextField();
-		passinput.setPromptText("Password");
-		GridPane.setConstraints(passinput, 1, 1);
+		Label pass = new Label("Password:");
+			GridPane.setConstraints(pass, 0, 1);
+		TextField psw = new TextField();
+		psw.setPromptText("Password");
+			GridPane.setConstraints(psw, 1, 1);
 
 		Button log = new Button("Login");
-		GridPane.setConstraints(log, 1, 2);
-		
-		grid.getChildren().addAll(name, nameinput, pass, passinput, log);
-		Scene sc = new Scene(grid, 400, 400);
-		window.setScene(sc);
+			GridPane.setConstraints(log, 1, 2);
+
+
+		grid.getChildren().addAll(name, usr, pass, psw, log);
+		Scene scene = new Scene(grid, 300, 300);
+		window.setScene(scene);
 		window.show();
 	}
 }
