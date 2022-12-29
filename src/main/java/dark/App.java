@@ -1,6 +1,7 @@
 package dark;
 
 import javafx.application.*;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -20,26 +21,33 @@ public class App extends Application
 	{
 		window = primaryStage;
 		window.setTitle("The window");
-		
-		Button button = new Button("Click me");
-		button.setOnAction(e -> closing());
-		window.setOnCloseRequest(e -> {
-			e.consume();
-			closing();
-		});
 
-		VBox layout = new VBox();
-		layout.getChildren().add(button);
-		layout.setAlignment(Pos.CENTER);
-		Scene sc = new Scene(layout, 300, 300);
+		GridPane grid = new GridPane();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		grid.setVgap(6);
+		grid.setHgap(9);
+
+		Label name = new Label("Username");
+		GridPane.setConstraints(name, 0, 0);
+
+		TextField nameinput = new TextField();
+		nameinput.setPromptText("Username");
+		GridPane.setConstraints(nameinput, 1, 0);
+
+
+		Label pass = new Label("Password");
+		GridPane.setConstraints(pass, 0, 1);
+
+		TextField passinput = new TextField();
+		passinput.setPromptText("Password");
+		GridPane.setConstraints(passinput, 1, 1);
+
+		Button log = new Button("Login");
+		GridPane.setConstraints(log, 1, 2);
+		
+		grid.getChildren().addAll(name, nameinput, pass, passinput, log);
+		Scene sc = new Scene(grid, 400, 400);
 		window.setScene(sc);
 		window.show();
-	}
-
-	private void closing()
-	{
-		Boolean answer = confirmbox.confirm("Are you sure you want to exit?");
-		if (answer)
-			window.close();
 	}
 }
