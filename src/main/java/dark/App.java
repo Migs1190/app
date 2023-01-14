@@ -1,4 +1,6 @@
 package dark;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.application.*;
 import javafx.geometry.*;
@@ -10,46 +12,41 @@ import javafx.stage.*;
 public class App extends Application
 {
 	Stage window;
+    Scene Scene;
 	public static void main(String[] args)
-	{
-		launch(args);
-	}
+	{launch(args);}
 
 	@Override
 	public void start(Stage primaryStage)
 	{
 		window = primaryStage;
-		window.setTitle("The window");
-
-		GridPane grid = new GridPane();
-		grid.setPadding(new Insets(10, 10, 10, 10));
-		grid.setVgap(7);
-		grid.setHgap(10);
-
-        
-        CheckBox rar = new CheckBox("RAR");
-            GridPane.setConstraints(rar, 0, 0);
-        CheckBox zip = new CheckBox("ZIP");
-            GridPane.setConstraints(rar, 1, 0);
-        zip.setSelected(true);
-
-        Button patch = new Button("Patch");
-            GridPane.setConstraints(patch, 2, 0);
-        System.out.println("Patching: ");
-        patch.setOnAction(e -> checking(rar, zip));
-
-		grid.getChildren().addAll(patch, rar, zip);
-		Scene scene = new Scene(grid, 300, 300);
-		window.setScene(scene);
+		window.setTitle("Elden Ring");
+        window.setScene(SetScene());
 		window.show();
 	}
-
-    private void checking(CheckBox x, CheckBox y)
+//-------------------------------------------------------------------------
+   public Scene SetScene()
     {
-        System.out.print("Patching: ");
-        if(x.isSelected())
-            System.out.print("RAR ");
-        if(y.isSelected())
-            System.out.print("ZIP\n");
+        GridPane grid = new GridPane();
+		grid.setPadding(new Insets(10, 10, 10, 10));
+		grid.setVgap(10);
+		grid.setHgap(10);
+        window.setMinHeight(100);
+        window.setMinWidth(200);
+
+		ChoiceBox<String> choice = new ChoiceBox<>();
+		choice.getItems().addAll("Limgrave", "Liurnia", "Caelid", "Altus Plateau", "Mountaintops of the Giants", "Crumbling Farum Azula", "Deeproot Depths", "Siofra River", "Ainsel River", "Roundtable Hold" );
+		choice.setValue("Limgrave");
+
+        choice.getSelectionModel().selectedItemProperty().addListener((v, oldValue, newValue) -> System.out.println(newValue));
+
+		Button button = new Button("Check");
+			GridPane.setConstraints(button, 1, 0);
+		button.setOnAction(e -> System.out.println(choice.getValue()));
+
+		grid.getChildren().addAll(choice, button);
+		Scene mainscene = new Scene(grid, 640, 400);
+        Scene = mainscene;
+        return mainscene;
     }
 }
